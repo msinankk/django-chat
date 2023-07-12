@@ -6,7 +6,7 @@ $(document).ready(function () {
   chatSocket.onmessage = function (e) {
     let data = JSON.parse(e.data);
     console.log("Data:", data);
-    // chatSocket.send(JSON.stringify({"message":"success"}))
+    chatSocket.send(JSON.stringify({"message":"success"}))
 
     if (data.type === "chat") {
       let messages = document.getElementById("container");
