@@ -3,3 +3,12 @@
     width: 100%;
     overflow: scroll;
 }
+
+.chat-message{
+    width: 500px;
+    background: crimson;
+    padding: 5px;
+    border-radius: 8px;
+    color: white;
+    margin: 3px;
+}
