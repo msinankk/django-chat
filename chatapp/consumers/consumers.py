@@ -14,6 +14,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     """
 
     async def connect(self):
+        print("inside connect....")
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = "chat_%s" % self.room_name
 
@@ -23,10 +24,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, _close_code):
+        print("inside disconnect...")
         # Leave room group
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
+        print("inside recieve....")
         data = json.loads(text_data)
         message = data["message"]
         sender = data["sender"]
@@ -41,6 +44,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         """
         chat message method
         """
+        print("inside chat message...")
         message = event["message"]
         sender = event["sender"]
 
