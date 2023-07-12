@@ -1,11 +1,13 @@
 {% extends 'index.html' %}
 {% block content %}
-<div id="chat-container">
-    
+<div class="container">
+    <form action="">
+        <input type="input" class="form-control" name="message" id="message">
+        <input type="submit">
+    </form>
+    <div id="chat-container">
+        
+    </div>
 </div>
-<form action="">
-    <input type="input" name="message" id="message">
-    <input type="submit">
-</form>
 
 {% endblock content %}
