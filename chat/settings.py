@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "chat.wsgi.application"
+# WSGI_APPLICATION = "chat.wsgi.application"
 
 
 # Database
@@ -124,7 +124,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ASGI_APPLICATION = "config.asgi.application"
+ASGI_APPLICATION = "chat.asgi.application"
 
 
 CHANNEL_LAYERS = {
