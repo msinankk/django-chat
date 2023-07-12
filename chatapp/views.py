@@ -7,8 +7,9 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def home(request):
+
+def chat(request):
     """
-    Chat project home page method
+    Chat project chat page method
     """
-    return render(request,"index.html")
+    return render(request, "index.html")
