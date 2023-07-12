@@ -15,9 +15,20 @@ class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
         self.accept()
+        self.channel_layer = "test"
         self.send(json.dumps({"type": "success message"}))
 
     def receive(self, text_data=None, bytes_data=None):
         super().receive(text_data, bytes_data)
-        print(text_data)
-        return 
+        text_data_json = json.loads(text_data)
+        message = text_data_json["chat"]
+        self.send(
+            json.dumps(
+                {
+                    "type": "chat",
+                    "message": message,
+                }
+            )
+        )
+
+        return

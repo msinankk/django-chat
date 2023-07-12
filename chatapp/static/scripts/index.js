@@ -6,20 +6,24 @@ $(document).ready(function () {
   chatSocket.onmessage = function (e) {
     let data = JSON.parse(e.data);
     console.log("Data:", data);
-    chatSocket.send(JSON.stringify({"message":"success"}))
-
+    
     if (data.type === "chat") {
-      let messages = document.getElementById("container");
+      let messages = document.getElementById("chat-container");
 
       messages.append(
-        "beforeend",
         `<div>
           <p>${data.message}</p>
-      </div>`
+          </div>`
       );
     }
   };
 
+  $("#message-form").submit(function (e) { 
+    e.preventDefault();
+    chatMessage = $("#message").val();
+    chatSocket.send(JSON.stringify({"chat":chatMessage}))
+
+  });
   // let form = document.getElementById("message-form");
   // form.addEventListener("submit", (e) => {
   //   e.preventDefault();
