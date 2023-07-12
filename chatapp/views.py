@@ -12,4 +12,4 @@ def chat(request):
     """
     Chat project chat page method
     """
-    return render(request, "chat.html")
+    return render(request, "chat/chats.html")
