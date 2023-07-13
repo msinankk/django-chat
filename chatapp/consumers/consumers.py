@@ -53,6 +53,9 @@ class ChatConsumer(WebsocketConsumer):
         return
 
     def disconnect(self, close_code):
+        """
+        This method is used to disconnect the connection
+        """
         # Disconnect the connection
         async_to_sync(self.channel_layer.group_discard)(
             self.room_group_name,
