@@ -6,7 +6,7 @@
         {% for user in users %}
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button">
+            <button class="accordion-button collapsed" data-user-id="{{user.id}}" type="button">
               {{user}}
             </button>
           </h2>
@@ -15,18 +15,20 @@
       </div>
     </div>
     <div class="col-10">
-      <form action="" class="d-flex d-flex-row" id="message-form">
-        <input
+      <form action="" id="message-form">
+        <div class="d-flex d-flex-row">
+          <input
           type="input"
           class="form-control w-75"
           name="message"
           id="message"
-        />
-        <input
+          />
+          <input
           type="submit"
           class="btn btn-primary"
           style="margin-left: 10px"
-        />
+          />
+        </div>
       </form>
       <div id="chat-container"></div>
     </div>

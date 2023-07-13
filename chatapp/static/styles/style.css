@@ -13,3 +13,7 @@
     color: white;
     margin: 5px;
 }
+
+#message-container{
+    width: 75%;
+}
