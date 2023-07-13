@@ -53,7 +53,6 @@ class ChatConsumer(WebsocketConsumer):
         """
         data = event["data"]
         room_name = event["room_name"]
-        print(data)
         self.send(
             text_data=json.dumps({"type": "chat", "data": data, "room_name": room_name})
         )
