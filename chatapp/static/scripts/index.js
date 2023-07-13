@@ -65,6 +65,7 @@ $(document).ready(function () {
     $("#chat-container").html("");
 
     const userId = $(this).attr("data-user-id");
+    alert(userId)
     $("#chat-container").attr("data-user-id", userId);
     data = {
       user_id: userId,

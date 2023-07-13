@@ -22,9 +22,10 @@ class ChatConsumer(WebsocketConsumer):
         data = decode_query_string(data)
         user2_id = data["user_id"]
 
-        room = private_room(user1_id, user2_id[0])
+        user1 = User.objects.get(id=user1_id)
+        user2 = User.objects.get(id=user2_id[0])
+        room = private_room(user1, user2)
         self.room_group_name = room.name
-
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
             self.channel_name,
