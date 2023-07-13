@@ -15,10 +15,12 @@ class ChatConsumer(WebsocketConsumer):
     """
 
     def connect(self):
-        self.room_group_name = "test"
+        print("connected...")
         session = self.scope["session"]
         user_id = session["_auth_user_id"]
         user = User.objects.get(id=user_id)
+
+        self.room_group_name = user.chatroom_set.first().name
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
