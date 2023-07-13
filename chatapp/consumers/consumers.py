@@ -57,13 +57,13 @@ class ChatConsumer(WebsocketConsumer):
         sender_id = data["sender_id"]
         user = User.objects.get(id=sender_id)
         room = ChatRoom.objects.get(name=room_name)
-        
+
         message = Message()
         message.sender = user
         message.chat_room = room
         message.text = message
         message.save()
-        
+
         self.send(
             text_data=json.dumps({"type": "chat", "data": data, "room_name": room_name})
         )
