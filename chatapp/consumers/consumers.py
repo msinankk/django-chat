@@ -48,5 +48,13 @@ class ChatConsumer(WebsocketConsumer):
 
     def chat_message(self, event):
         data = event["data"]
+        print(data)
         self.send(text_data=json.dumps({"type": "chat", "data": data}))
         return
+
+    def disconnect(self, close_code):
+        # Disconnect the connection
+        async_to_sync(self.channel_layer.group_discard)(
+            self.room_group_name,
+            self.channel_name,
+        )

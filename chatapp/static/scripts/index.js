@@ -46,13 +46,17 @@ $(document).ready(function () {
     e.preventDefault();
     chatMessage = $("#message").val();
     const receiverId = $("#chat-container").attr("data-user-id");
-    window["chatSocket"].send(JSON.stringify({ 
-      type:"private_room",
-      message: chatMessage,
-      sender_id:currentUserId,
-      receiver_id:receiverId,
-    }));
-    socketFunc(window["chatSocket"])
+    if (chatMessage != "") {
+      
+      window["chatSocket"].send(JSON.stringify({ 
+        type:"private_room",
+        message: chatMessage,
+        sender_id:currentUserId,
+        receiver_id:receiverId,
+      }));
+      socketFunc(window["chatSocket"])
+    }
+      $("#message").val("")
 
   });
 
@@ -72,7 +76,9 @@ $(document).ready(function () {
     };
     const queryString = convertToQueryString(data);
     dataUrl = url + queryString;
-
+    if (window["chatSocket"] != null){
+      window["chatSocket"].close();
+    }
     window["chatSocket"] = new WebSocket(dataUrl);
     socketFunc(window["chatSocket"])
 
