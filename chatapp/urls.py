@@ -8,5 +8,6 @@ from chatapp import views
 
 
 urlpatterns = [
-    path("",views.chat)
+    path("", views.chat),
+    path("previous-chat", views.previous_chat, name="previous-chat"),
 ]
