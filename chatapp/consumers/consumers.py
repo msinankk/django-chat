@@ -47,6 +47,9 @@ class ChatConsumer(WebsocketConsumer):
         return
 
     def chat_message(self, event):
+        """
+        The method is used to broad cast the method to the channel
+        """
         data = event["data"]
         print(data)
         self.send(text_data=json.dumps({"type": "chat", "data": data}))
