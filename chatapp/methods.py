@@ -11,10 +11,12 @@ def private_room(user1, user2):
     """
     Private room method
     """
-    existing_room = ChatRoom.objects.filter(is_private=True, users__in=[user1, user2])
-        for room in existing_room:
-            if room.users.count() == 2:
-                return room    
+    existing_room = ChatRoom.objects.filter(
+        is_private=True, users__id__in=[user1, user2]
+    )
+    for room in existing_room:
+        if room.users.count() == 2:
+            return room
     room = ChatRoom()
     room.name = user1.username + user2.username
     room.users.add([user1, user2])
