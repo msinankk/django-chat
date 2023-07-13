@@ -4,6 +4,7 @@
     <div class="col-2">
       <div class="accordion">
         {% for user in users %}
+        {% if user != request.user %}
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" data-user-id="{{user.id}}" type="button">
@@ -11,6 +12,7 @@
             </button>
           </h2>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
     </div>
