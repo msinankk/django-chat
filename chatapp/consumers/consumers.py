@@ -31,7 +31,7 @@ class ChatConsumer(WebsocketConsumer):
             self.channel_name,
         )
         self.accept()
-        self.send(json.dumps({"type": "success message"}))
+        self.send(json.dumps({"type": "success_connection", "room_name": room.name}))
 
     def receive(self, text_data=None, bytes_data=None):
         super().receive(text_data, bytes_data)
@@ -41,7 +41,11 @@ class ChatConsumer(WebsocketConsumer):
         print("------------------")
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
-            {"type": "chat_message", "data": text_data_json},
+            {
+                "type": "chat_message",
+                "data": text_data_json,
+                "room_name": self.room_group_name,
+            },
         )
 
         return
@@ -51,8 +55,11 @@ class ChatConsumer(WebsocketConsumer):
         The method is used to broad cast the method to the channel
         """
         data = event["data"]
+        room_name = event["room_name"]
         print(data)
-        self.send(text_data=json.dumps({"type": "chat", "data": data}))
+        self.send(
+            text_data=json.dumps({"type": "chat", "data": data, "room_name": room_name})
+        )
         return
 
     def disconnect(self, close_code):

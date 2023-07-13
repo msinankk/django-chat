@@ -22,22 +22,31 @@ $(document).ready(function () {
       console.log("Data:", data);
   
       if (data.type === "chat") {
-        var messagesContainer = $("#chat-container");
-  
-        // Create a new <div> element
-        var newDiv = $("<div class='chat-message'>");
-        if (currentUserId == data.data.sender_id) {
-          newDiv.addClass("my-chat") 
+        roomName = $("#chat-container").attr("data-room");
+        if (data.room_name == roomName) {
+          
+          var messagesContainer = $("#chat-container");
+          
+          // Create a new <div> element
+          var newDiv = $("<div class='chat-message'>");
+          if (currentUserId == data.data.sender_id) {
+            newDiv.addClass("my-chat") 
+          }
+          
+          // Create a <p> element and set its content to 'data.message'
+          var newParagraph = $("<p>").text(data.data.message);
+          
+          // Append the <p> element to the <div> element
+          newDiv.append(newParagraph);
+          
+          // Append the <div> element to the 'messages' container
+          messagesContainer.append(newDiv);
         }
-  
-        // Create a <p> element and set its content to 'data.message'
-        var newParagraph = $("<p>").text(data.data.message);
-  
-        // Append the <p> element to the <div> element
-        newDiv.append(newParagraph);
-  
-        // Append the <div> element to the 'messages' container
-        messagesContainer.append(newDiv);
+      }
+      else if (data.type="success_connection") {
+        $("#chat-container").attr("data-room", data.room_name);
+      } else {
+        
       }
     };
   }
