@@ -1,13 +1,38 @@
-{% extends 'index.html' %}
-{% block content %}
+{% extends 'index.html' %} {% block content %}
 <div class="container">
-    <form action="" id="message-form">
-        <input type="input" class="form-control" name="message" id="message">
-        <input type="submit">
-    </form>
-    <div id="chat-container">
-        
+  <div class="row">
+    <div class="col-2">
+      <div class="accordion">
+        {% for user in users %}
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" data-user-id="{{user.id}}" type="button">
+              {{user}}
+            </button>
+          </h2>
+        </div>
+        {% endfor %}
+      </div>
     </div>
+    <div class="col-10">
+      <form action="" id="message-form">
+        <div class="d-flex d-flex-row">
+          <input
+          type="input"
+          class="form-control w-75"
+          name="message"
+          id="message"
+          />
+          <input
+          type="submit"
+          class="btn btn-primary"
+          style="margin-left: 10px"
+          />
+        </div>
+      </form>
+      <div id="chat-container"></div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
