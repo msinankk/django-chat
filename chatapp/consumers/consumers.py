@@ -4,6 +4,7 @@ consumer.py
 This module is used to handle websocket requests
 """
 import json
+from django.contrib.auth.models import User
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 
@@ -15,6 +16,10 @@ class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
         self.room_group_name = "test"
+        session = self.scope["session"]
+        user_id = session["_auth_user_id"]
+        user = User.objects.get(id=user_id)
+
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
             self.channel_name,
