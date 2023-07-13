@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class ChatUsers(models.Model):
+class ChatUser(models.Model):
     """
     ChatUser model
     """
