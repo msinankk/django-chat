@@ -26,9 +26,12 @@ $(document).ready(function () {
   
         // Create a new <div> element
         var newDiv = $("<div class='chat-message'>");
+        if (currentUserId == data.data.sender_id) {
+          newDiv.addClass("my-chat") 
+        }
   
         // Create a <p> element and set its content to 'data.message'
-        var newParagraph = $("<p>").text(data.message);
+        var newParagraph = $("<p>").text(data.data.message);
   
         // Append the <p> element to the <div> element
         newDiv.append(newParagraph);
