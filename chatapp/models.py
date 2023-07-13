@@ -39,10 +39,11 @@ class ChatRoom(TrackingModel):
     ChatRoom model
     """
 
-    name = models.CharField(max_length=50,unique=True)
+    name = models.CharField(max_length=50, unique=True)
     users = models.ManyToManyField(User)
     unread_by_1 = models.PositiveIntegerField(default=0)
     unread_by_2 = models.PositiveIntegerField(default=0)
+    is_private = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.name)
@@ -56,5 +57,5 @@ class Message(TrackingModel):
     sender = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     chat_room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE)
     text = models.TextField(blank=False, null=False)
-    file = models.FileField(null=True,blank=True,upload_to="media/")
+    file = models.FileField(null=True, blank=True, upload_to="media/")
     is_read = models.BooleanField(default=False)
