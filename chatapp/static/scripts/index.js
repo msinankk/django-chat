@@ -40,4 +40,10 @@ $(document).ready(function () {
   //   );
   //   form.reset();
   // });
+  $(".accordion-button").click(function (e) { 
+    e.preventDefault();
+    $(".accordion-button").addClass("collapsed");
+    $(this).removeClass("collapsed");
+    
+  });
 });
