@@ -1,7 +1,8 @@
 #chat-container{
     height: 500px !important;
-    width: 100%;
+    width: 85%;
     overflow: scroll;
+    padding: 10px;
 }
 
 .chat-message{
@@ -10,5 +11,5 @@
     padding: 5px;
     border-radius: 8px;
     color: white;
-    margin: 3px;
+    margin: 5px;
 }
