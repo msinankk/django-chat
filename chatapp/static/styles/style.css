@@ -1,19 +1,26 @@
-#chat-container{
+#chat-container {
     height: 500px !important;
     width: 85%;
     overflow: scroll;
     padding: 10px;
 }
 
-.chat-message{
+.chat-message {
     width: 500px;
-    background: crimson;
-    padding: 5px;
+    background: rgb(255, 234, 239);
+    padding: 10px;
     border-radius: 8px;
-    color: white;
+    color: rgb(0, 0, 0);
     margin: 5px;
 }
 
-#message-container{
+#message-container {
     width: 75%;
+}
+
+
+.my-chat {
+    background-color: rgb(229, 243, 248);
+    color: black;
+
 }
