@@ -6,10 +6,11 @@ This module is used to map the methods with the routes
 import json
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.core import serializers
+from django.http import JsonResponse
 from django.contrib.sessions.backends.db import SessionStore
 from chatapp.methods import private_room
+from chatapp.serializers import MessageSerializer
 
 # Create your views here.
 
@@ -38,11 +39,12 @@ def previous_chat(request):
     receiver_id = request.POST["receiver_id"]
     user2 = User.objects.get(id=receiver_id)
     room = private_room(user, user2)
-    print("------------")
-    print(room)
-    print("------------")
     chats = room.message_set.all()
-    chats_json = (serializers.serialize("json", chats),)
-    print(chats_json)
+    # context = {"request": request}
+    # serializer = MessageSerializer(chats, many=False, context=context)
+    # print("-----------------")
+    # print(serializer.data)
+    # print("-----------------")
+    serializer = serializers.serialize("json", chats)
 
-    return JsonResponse({"message": "success"})
+    return JsonResponse({"data":serializer})

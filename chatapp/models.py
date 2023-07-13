@@ -59,3 +59,6 @@ class Message(TrackingModel):
     text = models.TextField(blank=False, null=False)
     file = models.FileField(null=True, blank=True, upload_to="media/")
     is_read = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.text

@@ -21,12 +21,16 @@ $(document).ready(function () {
     return "?" + params.toString();
   }
 
+  function addMessage() {
+    
+  }
+
   var url = `ws://${window.location.host}/ws/socket-server/`;
 
   function socketFunc(chatSocket) {
     chatSocket.onmessage = function (e) {
       let data = JSON.parse(e.data);
-      console.log("Data:", data);
+      // console.log("Data:", data);
 
       if (data.type === "chat") {
         roomName = $("#chat-container").attr("data-room");
@@ -105,7 +109,28 @@ $(document).ready(function () {
       // contentType: "application/json",
       success: function (response) {
         // Handle the success response
-        console.log(response);
+        data = JSON.parse(response.data)
+        console.log(data);
+        data.forEach(item => {
+          console.log(item);
+          const message = item.fields.text
+          var messagesContainer = $("#chat-container");
+
+          // Create a new <div> element
+          var newDiv = $("<div class='chat-message'>");
+          if (currentUserId == item.fields.sender) {
+            newDiv.addClass("my-chat");
+          }
+
+          // Create a <p> element and set its content to 'data.message'
+          var newParagraph = $("<p>").text(message);
+
+          // Append the <p> element to the <div> element
+          newDiv.append(newParagraph);
+
+          // Append the <div> element to the 'messages' container
+          messagesContainer.append(newDiv);
+        });
       },
     });
   });
