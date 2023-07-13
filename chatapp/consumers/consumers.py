@@ -36,9 +36,6 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None):
         super().receive(text_data, bytes_data)
         text_data_json = json.loads(text_data)
-        print("------------------")
-        print(text_data_json)
-        print("------------------")
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {
