@@ -78,6 +78,9 @@ $(document).ready(function () {
   });
 
   $(".accordion-button").click(function (e) {
+    if (window["chatSocket"] != null) {
+      window["chatSocket"].close();
+    }
     $("#form-container").show();
     $("#form-container").addClass("d-flex d-flex-row");
     e.preventDefault();
@@ -92,9 +95,6 @@ $(document).ready(function () {
     };
     const queryString = convertToQueryString(data);
     dataUrl = url + queryString;
-    if (window["chatSocket"] != null) {
-      window["chatSocket"].close();
-    }
     window["chatSocket"] = new WebSocket(dataUrl);
     socketFunc(window["chatSocket"]);
 
