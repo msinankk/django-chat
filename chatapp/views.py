@@ -34,5 +34,5 @@ def previous_chat(request):
     This method is used to render previous chats from the db
     """
     user = request.user
-    
+    print("------------")
     return JsonResponse({"message": "success"})
