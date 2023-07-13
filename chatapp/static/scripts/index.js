@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var currentUserId = $("#currentUser").attr("data-id")
   function convertToQueryString(data) {
     const params = new URLSearchParams();
 
@@ -25,9 +26,12 @@ $(document).ready(function () {
   
         // Create a new <div> element
         var newDiv = $("<div class='chat-message'>");
+        if (currentUserId == data.data.sender_id) {
+          newDiv.addClass("my-chat") 
+        }
   
         // Create a <p> element and set its content to 'data.message'
-        var newParagraph = $("<p>").text(data.message);
+        var newParagraph = $("<p>").text(data.data.message);
   
         // Append the <p> element to the <div> element
         newDiv.append(newParagraph);
@@ -41,7 +45,13 @@ $(document).ready(function () {
   $("#message-form").submit(function (e) {
     e.preventDefault();
     chatMessage = $("#message").val();
-    window["chatSocket"].send(JSON.stringify({ chat: chatMessage }));
+    const receiverId = $("#chat-container").attr("data-user-id");
+    window["chatSocket"].send(JSON.stringify({ 
+      type:"private_room",
+      message: chatMessage,
+      sender_id:currentUserId,
+      receiver_id:receiverId,
+    }));
     socketFunc(window["chatSocket"])
 
   });

@@ -13,7 +13,12 @@ def private_room(user1: object, user2: object):
     """
     Private room method
     """
-    existing_room = ChatRoom.objects.filter(is_private=True).annotate(num_users=Count('users')).filter(num_users=2, users=user1).filter(users=user2)
+    existing_room = (
+        ChatRoom.objects.filter(is_private=True)
+        .annotate(num_users=Count("users"))
+        .filter(num_users=2, users=user1)
+        .filter(users=user2)
+    )
 
     if existing_room.exists():
         room = existing_room.first()
