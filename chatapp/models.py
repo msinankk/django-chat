@@ -39,7 +39,7 @@ class ChatRoom(TrackingModel):
     ChatRoom model
     """
 
-    name = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=50,unique=True)
     users = models.ManyToManyField(User)
     unread_by_1 = models.PositiveIntegerField(default=0)
     unread_by_2 = models.PositiveIntegerField(default=0)
