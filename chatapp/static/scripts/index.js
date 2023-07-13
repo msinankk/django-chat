@@ -13,7 +13,7 @@ $(document).ready(function () {
     return "?" + params.toString();
   }
 
-  let url = `ws://${window.location.host}/ws/socket-server/`;
+  var url = `ws://${window.location.host}/ws/socket-server/`;
 
   function socketFunc(chatSocket) {
     chatSocket.onmessage = function (e) {
@@ -41,19 +41,10 @@ $(document).ready(function () {
   $("#message-form").submit(function (e) {
     e.preventDefault();
     chatMessage = $("#message").val();
-    chatSocket.send(JSON.stringify({ chat: chatMessage }));
+    window["chatSocket"].send(JSON.stringify({ chat: chatMessage }));
+    socketFunc(window["chatSocket"])
+
   });
-  // let form = document.getElementById("message-form");
-  // form.addEventListener("submit", (e) => {
-  //   e.preventDefault();
-  //   let message = e.target.message.value;
-  //   chatSocket.send(
-  //     JSON.stringify({
-  //       message: message,
-  //     })
-  //   );
-  //   form.reset();
-  // });
 
   $("#form-container").hide();
   $(".accordion-button").click(function (e) {
@@ -65,7 +56,6 @@ $(document).ready(function () {
     $("#chat-container").html("");
 
     const userId = $(this).attr("data-user-id");
-    alert(userId)
     $("#chat-container").attr("data-user-id", userId);
     data = {
       user_id: userId,
@@ -73,8 +63,8 @@ $(document).ready(function () {
     const queryString = convertToQueryString(data);
     dataUrl = url + queryString;
 
-    const chatSocket = new WebSocket(dataUrl);
-    socketFunc(chatSocket)
+    window["chatSocket"] = new WebSocket(dataUrl);
+    socketFunc(window["chatSocket"])
 
   });
 });
