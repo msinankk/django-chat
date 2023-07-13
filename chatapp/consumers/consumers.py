@@ -55,13 +55,14 @@ class ChatConsumer(WebsocketConsumer):
         data = event["data"]
         room_name = event["room_name"]
         sender_id = data["sender_id"]
+        text_message = data['message']
         user = User.objects.get(id=sender_id)
         room = ChatRoom.objects.get(name=room_name)
 
         message = Message()
         message.sender = user
         message.chat_room = room
-        message.text = message
+        message.text = text_message
         message.save()
 
         self.send(

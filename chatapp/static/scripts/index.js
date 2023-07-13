@@ -94,16 +94,15 @@ $(document).ready(function () {
     window["chatSocket"] = new WebSocket(dataUrl);
     socketFunc(window["chatSocket"]);
 
-
     var requestData = {
-      data: "data",
+      receiver_id: userId,
     };
-
+    console.log(requestData);
     $.ajax({
       type: "POST",
       url: "/previous-chat",
-      data: JSON.stringify(requestData),
-      contentType: "application/json",
+      data: requestData,
+      // contentType: "application/json",
       success: function (response) {
         // Handle the success response
         console.log(response);
