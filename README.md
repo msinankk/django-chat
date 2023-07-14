@@ -22,7 +22,7 @@ source venv/bin/activate
 
 ### Install requirement txt
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 ### Run migrations
 ```
