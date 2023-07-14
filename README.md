@@ -33,3 +33,14 @@ Create multiple admin users to chat with each others.
 ```
 python manage.py createsuperuser
 ```
+### Run the server
+#### - localhost
+```
+python manage.py runserver
+```
+ Then navigate to http://localhost:8000/admin/login and login with your account, then come back to http://localhost:8000/ start chat with the other users. Enjoy!
+#### - local n/w
+```
+python manage.py runserver 0.0.0.0:8000
+```
+To run within the local network run this instead and do the stuff described in runserver method.
